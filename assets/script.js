@@ -163,6 +163,8 @@ function storeScore() {
         }
 
         if (window.localStorage.getItem("highscores") == null) {
+            tempArray.push(tempObj);
+            window.localStorage.setItem("highscores", JSON.stringify(tempArray));
         } else {
             tempArray = JSON.parse(window.localStorage.getItem("highscores"));
 
