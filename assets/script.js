@@ -227,10 +227,10 @@ function storeScore() {
     function init() {
         startBtn.addEventListener("click", beginGame);
         answerBtn.addEventListener("click", checkAnswer);
-        viewScoreBtn.addEventListener("click", showScores);
         submitScoreBtn.addEventListener("click", storeScore);
         clearScoreBtn.addEventListener("click", clearScore);
         returnHomeBtn.addEventListener("click", setupQuiz);
+        viewScoreBtn.addEventListener("click", showScores);
 
         setupQuiz();
 
