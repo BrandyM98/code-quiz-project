@@ -28,11 +28,82 @@ var score = 0;
 var gameDone = true;
 
 //intro to quiz will go here
+function setupQuiz() {
+    remTime = gameTimer;
+    timerEl.textContent = gameTimer; //will set the time back?
 
+    document.querySelector("highscoreHolder").style.display = "none"; //will not show
+
+    titleEl.textContent = "Coding Quiz Challenge";
+
+    titleEl.style.display = "block"; // will show
+    document.querySelector("intro").style.display = "block";
+    viewScoreBtn.style.display = "block";
+    startBtn.style.display = "block";
+
+    return;
+
+}
 
 //when start button is hit this is what will go here
 
+function beginGame() {
+    gameDone = false;
+    cursor = 0;
+
+    viewScoreBtn.style.display = "none";
+    startBtn.style.display = "none";
+    document.querySelector("intro").style.display = "none";
+    timerEl2.style.display = "block";
+
+    openQuestions(cursor);
+    setTimer();
+
+    return;
+
+
+}
+
 //when time ends this is what will go here
 
-//
+function startTimer() {
+    var timeInterval = setInterval(function () {
+        if (gameDone === true) {
+            endInterval(timeInterval);
+            return;
+        }
+        if (remTime < 1) {
+            endInterval(timeInterval);
+            gameOver();
+        }
+        timerEl.textContent = remTime;
+        remTime--;
+    }, 1000); //this would be 1 second
+}
+
+function openQuestions(questionIndex); {
+    titleEl.textContent = questionEl.questions[questionIndex];
+    createAnswers(questionIndex);
+
+    return;
+}
+
+function createAnswers(questionIndex) {
+    answerBtn.innerHTML = "";
+
+    for(let answerIndex = 0; answerIndex < questionEl.answers [questionIndex].length; answerIndex++) {
+        var currentAnswer = document.createElement('li');
+        var tempString = questionEl.answers[questionIndex][answerIndex];
+
+        if (questionIndex.answers[questionIndex][answerIndex].includes("correct:")){
+            tempString = questionEl.answers[questionIndex][answerIndex].substring(8, questionEl.answers[questionIndex][answerIndex].length);
+            currentAnswer.id = "correct";
+        }
+        currentAnswer.textContent = tempString;
+        answerBtn.appendChild(currentAnswer);
+    }
+    return;
+}
+
+
 
