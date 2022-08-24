@@ -3,7 +3,7 @@ var startBtn = document.querySelector("#startBtn");
 var timerEl = document.querySelector("#timer");
 var timerEl2 = document.querySelector("header").children[1];
 var submitScoreBtn = document.querySelector("#submitBtn");
-var viewScoreBtn = document.querySelector("#scoresbtn");
+var viewScoreBtn = document.querySelector("#scoresBtn");
 var clearScoreBtn = document.querySelector("#clearScores");
 var answerBtn = document.querySelector("ul");
 var returnHomeBtn = document.querySelector("#backBtn");
@@ -38,7 +38,7 @@ function setupQuiz() {
     remTime = gameTimer;
     timerEl.textContent = gameTimer; //will set the time back?
 
-    document.querySelector("highscoreHolder").style.display = "none"; //will not show
+    document.querySelector("#highscoreHolder").style.display = "none"; //will not show
 
     titleEl.textContent = "Coding Quiz Challenge";
 
@@ -175,7 +175,7 @@ function storeScore() {
                     break;
                 }
             }
-                window.localStorage.getItem("highscores", JSON.stringify(tempArray))
+                window.localStorage.setItem("highscores", JSON.stringify(tempArray))
             }
 
             document.querySelector("input").value = "";
