@@ -1,63 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
-    <title>Code Quiz</title>
-    <style>
-        * {
-            user-select: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Quiz</title>
+  <style>
+    * {
+      user-select: none;
+    }
+  </style>
 </head>
-<main>
+<body>
+  <section id="start">
+    <h2>Start Quiz</h2>
+    <button>Begin</button>
+  </section>
+  <section id="quiz">
+    <h2 id="title">Questions</h2>
+    <div id="questions">
 
-    <body>
-        <div class="outer">
-            <!--this will be to contain everything?-->
-            <div>
-                <!-- this will be at the top like a nav bar would be-->
-                <section>
-                    <div class="top"><!--style="display: none"-->
-                        <button>SCORE BOARD</button>
-                        <p>TIMER</p>
-                    </div>
-                </section>
-            </div>
-
-            <div class="inner">
-                <!--this will be the inside where i can format the questions-->
-                <header id="intro">
-                    <!-- this will be the intro page-->
-                    <h1>Coding Quiz Challenge</h2>
-                    <p>Try to answer the code-related questions within the time limit. Keep in mind that incorrect
-                        answers
-                        will
-                        penalize your score/time by 10 seconds! </p>
-                    <button class="btn">Begin</button>
-                </header>
-
-                <main>
-                    <!-- this will be the inside box container-->
-                    <section id="quiz" style="display: none">
-                        <h2 id="title">Questions</h2>
-                        <div id="questions">
-                        </div>
-                    </section>
-
-                    <section id="end" style="display: none">
-                        <h2>Enter Initials</h2>
-                        <input type="text" />
-                        <button>Submit</button>
-                    </section>
-                </main>
-            </div>
-        </div>
-        <script src="./assets/script.js"></script>
-    </body>
-</main>
-
+    </div>
+  </section>
+  <section id="end">
+    <h2>Enter Initials</h2>
+    <input type="text" />
+    <button>Submit</button>
+  </section>
+  <script src="./script.js"></script>
+</body>
 </html>
