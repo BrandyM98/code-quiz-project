@@ -156,7 +156,7 @@ function storeScore() {
     var scoreBox = document.querySelector("input");
     var tempArray = [];
 
-    if (scoreBox.value != "" || scoreBox != null) {
+    if (scoreBox.value != "" || scoreBox.value != null) {
         var tempObj = {
             names: scoreBox.value,
             scores: score,
@@ -211,11 +211,12 @@ function storeScore() {
             newLi.textContent = "No Highscores"
             tempList.appendChild(newLi);
         }
+
         return;
 
     }
 
-    function clearScore() {
+    function clearScore() {//this will get rid of stored scores
         document.querySelector("ol").innerHTML = "";
         window.localStorage.clear();
 
