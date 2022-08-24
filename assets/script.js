@@ -12,10 +12,16 @@ var titleEl = document.querySelector("#title");
 //this is where I will put my questions and answers
 var questionEl = {
     questions: [ //I will write my questions here
-
+        "Commonly used data types do NOT include:",
+        "Arrays in JavaScript can be used to store",
+        "String values must be enclosed within _______ when being assigned to variables.",
+        "The condition in an if / else statment is enclosed with _____.",
     ],
     answers: [//the answers will go here
-
+        ["stings", "booleans", "correct:'alerts'", "numbers"],
+        ["numbers and strings", "other arrays", "booleans", "correct: 'all of the above'"],
+        ["commas", "correct:'curly brackets'", "quotes", "parenthesis"],
+        ["quotes", "curely brackets", "correct:'parenthesis'", "square brackets"],
     ]
 }
 
@@ -91,11 +97,11 @@ function openQuestions(questionIndex); {
 function createAnswers(questionIndex) {
     answerBtn.innerHTML = "";
 
-    for(let answerIndex = 0; answerIndex < questionEl.answers [questionIndex].length; answerIndex++) {
+    for (let answerIndex = 0; answerIndex < questionEl.answers[questionIndex].length; answerIndex++) {
         var currentAnswer = document.createElement('li');
         var tempString = questionEl.answers[questionIndex][answerIndex];
 
-        if (questionIndex.answers[questionIndex][answerIndex].includes("correct:")){
+        if (questionIndex.answers[questionIndex][answerIndex].includes("correct:")) {
             tempString = questionEl.answers[questionIndex][answerIndex].substring(8, questionEl.answers[questionIndex][answerIndex].length);
             currentAnswer.id = "correct";
         }
@@ -105,5 +111,19 @@ function createAnswers(questionIndex) {
     return;
 }
 
+function nextQuestion() {
+    gameDone = true;
+    score = remTime;
 
+    timerEl2.style.display = "none";
+    titleEl.style.display = "none";
+    answerBtn.innerHTML = "";
 
+    document.querySelector('#scoreSpan').textContent = score;
+    document.querySelector("#submit-score").style.display = "block";
+
+    return;
+
+}
+
+//everything under here is what will make the quiz function
