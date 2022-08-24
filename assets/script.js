@@ -6,7 +6,7 @@ var submitScoreBtn = document.querySelector("#submitBtn");
 var viewScoreBtn = document.querySelector("#scoresbtn");
 var clearScoreBtn = document.querySelector("#clearScores");
 var answerBtn = document.querySelector("ul");
-var returnHome = document.querySelector("#backBtn");
+var returnHomeBtn = document.querySelector("#backBtn");
 var titleEl = document.querySelector("#title");
 
 //this is where I will put my questions and answers
@@ -87,7 +87,7 @@ function startTimer() {
     }, 1000); //this would be 1 second
 }
 
-function openQuestions(questionIndex); {
+function openQuestions(questionIndex) {
     titleEl.textContent = questionEl.questions[questionIndex];
     createAnswers(questionIndex);
 
@@ -112,6 +112,16 @@ function createAnswers(questionIndex) {
 }
 
 function nextQuestion() {
+    cursor++;
+    if (cursor >= questionEl.questions.length) {
+        gameOver();
+    } else {
+        openQuestions(cursor);
+    }
+    return;
+}
+
+function gameOver() {
     gameDone = true;
     score = remTime;
 
@@ -126,4 +136,105 @@ function nextQuestion() {
 
 }
 
+
+//-----------//
+
+
 //everything under here is what will make the quiz function
+function checkAnswer(event) {
+    if (event.target != answerBtn) {
+        if (!(event.target.id.includes("correct"))) {
+            remTime -= 10; //wrong answers will take away 10 sec
+        }
+
+        nextQuestion();
+    }
+    return;
+}
+
+function storeScore() {
+    var scoreBox = document.querySelector("input");
+    var tempArray = [];
+
+    if (scoreBox.value != "" || scoreBox != null) {
+        var tempObj = {
+            names: scoreBox.value,
+            scores: score,
+        }
+
+        if (window.localStorage.getItem("highscores") == null) {
+        } else {
+            tempArray = JSON.parse(window.localStorage.getItem("highscores"));
+
+            for (let index = 0; index <= tempArray.length; index++) {
+                if (index == tempArray.length) {
+                    tempArray.push(tempObj)
+                    break;
+                } else if (tempArray[index].scores < score) {
+                    tempArray.splice(index, 0, tempObj);
+                    break;
+                }
+            }
+                window.localStorage.getItem("highscores", JSON.stringify(tempArray))
+            }
+
+            document.querySelector("input").value = "";
+            score = 0;
+
+            showScores();
+        }
+
+        return;
+
+    }
+
+    function showScores() {
+        titleEl.style.display = "none";
+        startBtn.style.display = "none";
+        document.querySelector("header").children[0].style.display = "none";
+        document.querySelector("intro").style.display = "none";
+        document.querySelector("#submit-score").style.display = "none";
+        document.querySelector("#highscoreHolder").style.display = `block`;
+
+        tempList = document.querySelector("ol");
+        tempList.innerHTML = ""
+
+        tempArray = JSON.parse(window.localStorage.getItem("highscores"));
+        if (tempArray != null) {
+            for (let index = 0; index <= tempArray.length; index++) {
+                var newLi = document.createElement("li");
+                newLi.textContent = tempArray[index].names + " - " + tempArray[index].scores;
+                tempList.appendChild(newLi);
+            }
+        } else {
+            var newLi = document.createElement("p")
+            newLi.textContent = "No Highscores"
+            tempList.appendChild(newLi);
+        }
+        return;
+
+    }
+
+    function clearScore() {
+        document.querySelector("ol").innerHTML = "";
+        window.localStorage.clear();
+
+        setupQuiz();
+
+        return;
+    }
+
+    function init() {
+        startBtn.addEventListener("click", beginGame);
+        answerBtn.addEventListener("click", checkAnswer);
+        viewScoreBtn.addEventListener("click", showScores);
+        submitScoreBtn.addEventListener("click", storeScore);
+        clearScoreBtn.addEventListener("click", clearScore);
+        returnHomeBtn.addEventListener("click", setupQuiz);
+
+        setupQuiz();
+
+        return;
+    }
+
+    init();
