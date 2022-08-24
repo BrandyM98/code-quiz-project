@@ -43,7 +43,7 @@ function setupQuiz() {
     titleEl.textContent = "Coding Quiz Challenge";
 
     titleEl.style.display = "block"; // will show
-    document.querySelector("intro").style.display = "block";
+    document.querySelector("#intro").style.display = "block";
     viewScoreBtn.style.display = "block";
     startBtn.style.display = "block";
 
@@ -59,11 +59,11 @@ function beginGame() {
 
     viewScoreBtn.style.display = "none";
     startBtn.style.display = "none";
-    document.querySelector("intro").style.display = "none";
+    document.querySelector("#intro").style.display = "none";
     timerEl2.style.display = "block";
 
     openQuestions(cursor);
-    setTimer();
+    startTimer();
 
     return;
 
@@ -101,7 +101,7 @@ function createAnswers(questionIndex) {
         var currentAnswer = document.createElement('li');
         var tempString = questionEl.answers[questionIndex][answerIndex];
 
-        if (questionIndex.answers[questionIndex][answerIndex].includes("correct:")) {
+        if (questionEl.answers[questionIndex][answerIndex].includes("correct:")) {
             tempString = questionEl.answers[questionIndex][answerIndex].substring(8, questionEl.answers[questionIndex][answerIndex].length);
             currentAnswer.id = "correct";
         }
@@ -192,7 +192,7 @@ function storeScore() {
         titleEl.style.display = "none";
         startBtn.style.display = "none";
         document.querySelector("header").children[0].style.display = "none";
-        document.querySelector("intro").style.display = "none";
+        document.querySelector("#intro").style.display = "none";
         document.querySelector("#submit-score").style.display = "none";
         document.querySelector("#highscoreHolder").style.display = `block`;
 
